@@ -1,6 +1,5 @@
 # Hagrid
-Vuejs based datatable
-
+The ultimate datatable
 
 ## Features
 - **Sorting**
