@@ -1,0 +1,7 @@
+dist
+coverage
+node_modules
+docs
+reports
+package.json
+.cache

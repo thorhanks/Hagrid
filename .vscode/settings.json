@@ -1,0 +1,29 @@
+{
+    "files.exclude": {
+        "**/.git": true,
+        "**/.cache": true,
+        "**/.DS_Store": true,
+        "**/node_modules": true,
+        "**/.vscode": true,
+        "**/.idea": true,
+        "**/tmp": true
+    },
+    "files.watcherExclude": {
+        "**/.git/objects/**": true,
+        "**/.git/subtree-cache/**": true,
+        "**/node_modules/**": true,
+        "**/.idea": true,
+        "**/tmp": true,
+        "**/dist": true
+    },
+    "search.exclude": {
+        "**/.cache": true,
+        "**/node_modules": true,
+        "**/.vscode": true,
+        "**/.idea": true,
+        "**/tmp": true,
+        "**/dist": true
+    },
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4
+}

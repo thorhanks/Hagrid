@@ -1,0 +1,6 @@
+node_modules
+dist
+reports
+docs/coverage
+junit.xml
+.cache

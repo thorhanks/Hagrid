@@ -1,0 +1,7 @@
+*.test.js
+dist
+coverage
+node_modules
+docs
+reports
+.cache
