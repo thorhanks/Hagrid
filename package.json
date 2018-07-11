@@ -6,13 +6,16 @@
   "author": "Thor Hanks <thor.hanks@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "parcel demo/index.html",
+    "build": "parcel build src/index.js",
+    "build:demo": "parcel build demo/index.html --out-dir demo/dist",
+    "build:docs": "vuepress build docs",
+    "start:docs": "vuepress dev docs",
+    "start:demo": "parcel demo/index.html",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch --verbose",
     "test:uncommitted": "jest -o",
     "lint": "eslint -c .eslintrc.json --ignore-path .eslintignore --ext .js,.vue ./src/**",
-    "build": "parcel build src/index.js",
     "commit-prep": "yarn run prettier && yarn run lint && yarn run test && yarn run build",
     "publish": "yarn run commit-prep && yarn publish",
     "prettier": "prettier --write --config ./.prettierrc --ignore-path ./.prettierignore \"./**/*.js\""
@@ -29,7 +32,8 @@
     "jest-vue": "^0.8.2",
     "parcel-bundler": "^1.9.4",
     "prettier": "^1.13.7",
-    "vue-template-compiler": "^2.5.16"
+    "vue-template-compiler": "^2.5.16",
+    "vuepress": "^0.11.0"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.0",

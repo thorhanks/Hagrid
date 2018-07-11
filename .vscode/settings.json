@@ -6,7 +6,9 @@
         "**/node_modules": true,
         "**/.vscode": true,
         "**/.idea": true,
-        "**/tmp": true
+        "**/tmp": true,
+        "**/demo/**/dist": true,
+        "**/docs/**/dist": true
     },
     "files.watcherExclude": {
         "**/.git/objects/**": true,
@@ -14,7 +16,9 @@
         "**/node_modules/**": true,
         "**/.idea": true,
         "**/tmp": true,
-        "**/dist": true
+        "**/.cache": true,
+        "**/demo/**/dist": true,
+        "**/docs/**/dist": true
     },
     "search.exclude": {
         "**/.cache": true,
@@ -22,7 +26,8 @@
         "**/.vscode": true,
         "**/.idea": true,
         "**/tmp": true,
-        "**/dist": true
+        "**/demo/**/dist": true,
+        "**/docs/**/dist": true
     },
     "editor.insertSpaces": true,
     "editor.tabSize": 4

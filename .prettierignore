@@ -1,7 +1,8 @@
 dist
 coverage
 node_modules
-docs
+demo/**/dist
+docs/**/dist
 reports
 package.json
 .cache

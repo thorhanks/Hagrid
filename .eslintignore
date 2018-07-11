@@ -1,7 +1,7 @@
 *.test.js
-dist
+demo/**/dist
+docs/**/dist
 coverage
 node_modules
-docs
 reports
 .cache

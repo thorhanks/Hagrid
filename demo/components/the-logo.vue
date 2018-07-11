@@ -14,7 +14,6 @@ export default {
 @import "../variables";
 
 .logo {
-    color: $color-primary;
     font-family: "Griffy";
     font-size: 35px;
 }

@@ -28,11 +28,13 @@ export default {
     padding: $space-l;
     min-width: 250px;
     text-align: right;
+    background-color: $color-primary;
+    color: $color-primary-text;
 }
 
 .page-layout__content {
     flex: 1 1 auto;
     padding: $space-l $space-xl;
-    box-shadow: 0px 0px 90px 10px rgba(0, 0, 0, 0.15);
+    box-shadow: 0px 0px 90px 10px rgba(0, 0, 0, 0.4);
 }
 </style>
