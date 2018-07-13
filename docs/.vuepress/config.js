@@ -1,6 +1,6 @@
 module.exports = {
     dest: ".deploy/docs",
-    base: "/Hagrid/",
+    base: "/Hagrid/docs/",
     title: "Hagrid",
     description: "The lovable vue datatable.",
 };
