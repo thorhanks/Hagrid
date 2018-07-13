@@ -7,10 +7,11 @@
   "license": "MIT",
   "scripts": {
     "build": "parcel build src/index.js",
-    "build:demo": "parcel build demo/index.html --out-dir .deploy/demo",
+    "build:demo": "parcel build demo/index.html --out-dir .deploy/demo --public-url ./",
     "build:docs": "vuepress build docs",
     "start:docs": "vuepress dev docs",
     "start:demo": "parcel demo/index.html",
+    "deploy": "sh deploy.sh",
     "test": "jest",
     "test:coverage": "jest --coverage",
     "test:watch": "jest --watch --verbose",
