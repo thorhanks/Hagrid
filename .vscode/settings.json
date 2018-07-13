@@ -2,6 +2,7 @@
     "files.exclude": {
         "**/.git": true,
         "**/.cache": true,
+        "**/.deploy": true,
         "**/.DS_Store": true,
         "**/node_modules": true,
         "**/.vscode": true,
@@ -17,11 +18,13 @@
         "**/.idea": true,
         "**/tmp": true,
         "**/.cache": true,
+        "**/.deploy": true,
         "**/demo/**/dist": true,
         "**/docs/**/dist": true
     },
     "search.exclude": {
         "**/.cache": true,
+        "**/.deploy": true,
         "**/node_modules": true,
         "**/.vscode": true,
         "**/.idea": true,
