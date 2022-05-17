@@ -1,7 +1,0 @@
-*.test.js
-demo/**/dist
-docs/**/dist
-coverage
-node_modules
-reports
-.cache
