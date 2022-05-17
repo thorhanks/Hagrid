@@ -1,0 +1,38 @@
+{
+    "name": "hagrid",
+    "private": true,
+    "version": "0.0.1",
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview",
+        "storybook": "start-storybook -p 6006",
+        "format": "prettier -w -u .",
+        "lint:script": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
+        "lint:style": "stylelint src/**/*.{css,scss,vue}",
+        "ci:storybook": "build-storybook -o gh-pages"
+    },
+    "dependencies": {
+        "vue": "^3.2.25"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.17.12",
+        "@storybook/addon-actions": "^6.4.22",
+        "@storybook/addon-essentials": "^6.4.22",
+        "@storybook/addon-links": "^6.4.22",
+        "@storybook/builder-vite": "^0.1.33",
+        "@storybook/vue3": "^6.4.22",
+        "@vitejs/plugin-vue": "^2.3.3",
+        "@vue/eslint-config-prettier": "^7.0.0",
+        "babel-loader": "^8.2.5",
+        "eslint": "^8.15.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "eslint-plugin-vue": "^8.7.1",
+        "prettier": "^2.6.2",
+        "stylelint": "^14.8.2",
+        "stylelint-config-recommended-vue": "^1.4.0",
+        "tailwindcss": "^3.0.24",
+        "vite": "^2.9.9",
+        "vue-loader": "^16.8.3"
+    }
+}
