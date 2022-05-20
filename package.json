@@ -13,14 +13,19 @@
         "ci:storybook": "build-storybook -o gh-pages"
     },
     "dependencies": {
-        "vue": "^3.2.25"
+        "pinia": "^2.0.14",
+        "vue": "^3.2.25",
+        "wretch": "^1.7.9"
     },
     "devDependencies": {
         "@babel/core": "^7.17.12",
+        "@faker-js/faker": "^6.3.1",
         "@storybook/addon-actions": "^6.4.22",
         "@storybook/addon-essentials": "^6.4.22",
         "@storybook/addon-links": "^6.4.22",
+        "@storybook/addon-postcss": "^2.0.0",
         "@storybook/builder-vite": "^0.1.33",
+        "@storybook/theming": "^6.5.3",
         "@storybook/vue3": "^6.4.22",
         "@vitejs/plugin-vue": "^2.3.3",
         "@vue/eslint-config-prettier": "^7.0.0",
@@ -28,6 +33,7 @@
         "eslint": "^8.15.0",
         "eslint-plugin-prettier": "^4.0.0",
         "eslint-plugin-vue": "^8.7.1",
+        "miragejs": "^0.1.44",
         "prettier": "^2.6.2",
         "stylelint": "^14.8.2",
         "stylelint-config-recommended-vue": "^1.4.0",
