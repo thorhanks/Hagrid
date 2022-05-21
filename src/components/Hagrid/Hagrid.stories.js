@@ -9,7 +9,7 @@ export default {
 export const Example = (args) => ({
     components: { Hagrid },
     template: `
-        <div class="m-5">
+        <div class="mx-20 my-10">
             <Hagrid v-bind="args" />
         </div>
     `,

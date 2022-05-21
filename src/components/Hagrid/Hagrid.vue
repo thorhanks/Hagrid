@@ -1,6 +1,7 @@
 <template>
-    <div class="">
-        <table class="w-full" @wheel.prevent="onTableMouseWheel">
+    <div class="font-sans flex items-stretch relative p-3">
+        <LoadingOverlay v-if="loading" />
+        <table class="flex-1 w-full" @wheel.prevent="onTableMouseWheel">
             <colgroup>
                 <col
                     v-for="c in columns"
@@ -10,50 +11,89 @@
             </colgroup>
             <thead>
                 <tr>
-                    <th v-for="c in columns" :key="c.key">{{ c.label }}</th>
+                    <th v-for="c in columns" :key="c.key" class="pb-3">
+                        {{ c.label }}
+                    </th>
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="r in windowRows" :key="r[tableConfig.rowKeyProp]">
-                    <td v-for="c in columns" :key="c.key">
-                        {{ r[c.valueProp] }}
-                    </td>
-                </tr>
+                <TableRow
+                    v-for="r in windowRows"
+                    :key="r[tableConfig.rowKeyProp]"
+                    :columns="columns"
+                    :record="r"
+                />
             </tbody>
         </table>
+        <VirtualScroller
+            ref="virtualScroller"
+            :popup-content-component="
+                tableConfig.virtualScrollerPopupContentComponent
+            "
+            :window-top-index-record="records[windowStartIndex]"
+            :scrollable-record-count="records.length - maxDisplayRowCount"
+            :total-scrollable-record-count="totalRecordCount"
+            @scrolled-to-new-window-start-index="(i) => (windowStartIndex = i)"
+            @scrolled-to-bottom="onScrolledToBottom"
+        />
     </div>
 </template>
 
 <script>
 import setupFakeTableApi from "./setup-fake-table-api.js";
 import wretch from "wretch";
+import TableRow from "./TableRow.vue";
+import VirtualScroller from "./VirtualScroller.vue";
+import LoadingOverlay from "./LoadingOverlay.vue";
 export default {
     name: "Hagrid",
-    components: {},
-    filters: {},
+    components: { TableRow, VirtualScroller, LoadingOverlay },
     props: {
         title: { type: String, default: null },
     },
     data: () => ({
         loading: false,
         records: [],
-        maxDisplayRowCount: 20,
+        totalRecordCount: 0,
+        maxDisplayRowCount: 10,
         windowStartIndex: 0,
         tableConfig: {
             rowKeyProp: "id",
+            virtualScrollerPopupContentComponent:
+                "VirtualScrollerPopoverContentAvatarInfo",
         },
         columns: [
             {
                 key: "name",
                 label: "Name",
                 valueProp: "name",
-                widthCss: "40%",
+                widthCss: "300px",
+                componentName: "TableCellAvatar",
+                alignment: null,
             },
             {
-                key: "favCat",
-                label: "Favorite Cat",
-                valueProp: "favCat",
+                key: "type",
+                label: "Type",
+                valueProp: "type",
+                widthCss: "200px",
+                componentName: null,
+                alignment: null,
+            },
+            {
+                key: "address",
+                label: "Address",
+                valueProp: "address",
                 widthCss: null,
+                componentName: null,
+                alignment: null,
+            },
+            {
+                key: "price",
+                label: "Price",
+                valueProp: "price",
+                widthCss: "150px",
+                componentName: null,
+                alignment: "right",
             },
         ],
     }),
@@ -84,6 +124,7 @@ export default {
                 .json()
                 .then((response) => {
                     this.records = this.records.concat(response.records);
+                    this.totalRecordCount = response.totalRecordCount;
                     this.loading = false;
                 });
         },
@@ -94,21 +135,27 @@ export default {
             // If user scrolled to top bound of table
             if (newWindowStartIndex < 0) {
                 this.windowStartIndex = 0;
+                this.$refs.virtualScroller.$setTopMargin(0);
                 return;
             }
 
             // If user scrolled to bottom bound of table
             if (newWindowStartIndex > this.topIndexOfLastWindow) {
                 this.windowStartIndex = this.topIndexOfLastWindow;
+                this.$refs.virtualScroller.$setTopMargin(
+                    this.topIndexOfLastWindow
+                );
                 if (!this.loading) this.fetchRecords();
                 return;
             }
 
             // Else we are not at top or bottom bound
             this.windowStartIndex = newWindowStartIndex;
+            this.$refs.virtualScroller.$setTopMargin(newWindowStartIndex);
+        },
+        onScrolledToBottom() {
+            if (!this.loading) this.fetchRecords();
         },
     },
 };
 </script>
-
-<style scoped></style>
