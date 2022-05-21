@@ -40,7 +40,7 @@
 </template>
 
 <script>
-import setupFakeTableApi from "./setup-fake-table-api.js";
+import { makeServer } from "./api-server.js";
 import wretch from "wretch";
 import TableRow from "./TableRow.vue";
 import VirtualScroller from "./VirtualScroller.vue";
@@ -54,6 +54,10 @@ export default {
     data: () => ({
         loading: false,
         records: [],
+        currentPageNum: 0,
+        pageSizeToFetch: 200,
+        sortValueProp: "name",
+        sortDirection: "asc",
         totalRecordCount: 0,
         maxDisplayRowCount: 10,
         windowStartIndex: 0,
@@ -110,21 +114,31 @@ export default {
         },
     },
     watch: {},
-    created() {
-        setupFakeTableApi();
-    },
+    created() {},
     mounted() {
+        makeServer();
         this.fetchRecords();
     },
     methods: {
         fetchRecords() {
+            if (
+                this.totalRecordCount > 0 &&
+                this.records.length === this.totalRecordCount
+            )
+                return;
+
             this.loading = true;
-            wretch("/api/tabledata")
+            let url = `/api/cats?page=${this.currentPageNum + 1}&size=${
+                this.pageSizeToFetch
+            }&sortby=${this.sortValueProp}&sortdirection=${this.sortDirection}`;
+            wretch(url)
                 .get()
                 .json()
                 .then((response) => {
-                    this.records = this.records.concat(response.records);
+                    //this.records = this.records.concat(response.records);
+                    response.records.forEach((x) => this.records.push(x));
                     this.totalRecordCount = response.totalRecordCount;
+                    this.currentPageNum += 1;
                     this.loading = false;
                 });
         },

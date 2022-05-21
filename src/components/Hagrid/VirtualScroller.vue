@@ -112,7 +112,7 @@ export default {
                     newSliderTopMargin
                 );
 
-                if (newSliderTopMargin >= this.sliderBottomBound - 5) {
+                if (newSliderTopMargin >= this.sliderBottomBound - 50) {
                     this.$emit("scrolledToBottom");
                 }
 
