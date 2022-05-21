@@ -1,0 +1,45 @@
+import { Meta } from "@storybook/addon-docs";
+
+<Meta title="Experiment 1/What Is This?" />
+
+# Experiment 1
+
+**What is this?**
+
+An experimental vue data table using an idea from an experiment I built years ago in vanilla js.
+
+**What Makes This Different?**
+
+The table renders a set constant number of rows, as the user scrolls the same set of rendered rows is updated
+and shifted upwards or downwards to give the appearance of scrolling. Think of the table as a sliding window
+viewing a set amount of rows at a time.
+
+## Features
+
+-   Mouse wheel scrolling support on table
+-   Totally custom fake scrollbar
+-   Scrollbar info popup giving user context as they scroll
+-   Infinite scrolling type loading of new records from API
+
+## Pros
+
+-   Very fast performance, even built in development mode (production would be even faster)
+-   Constant (and low) use of DOM elements. No matter how many records are loaded the table will always have the
+    same amount of DOM elements.
+-   Can load bigger chunks of records from server using infinite scroll and not take up page space
+-   No need to scroll the entire page. Table/page controls always visible
+-   User can scrub through records with context. So for example they could easily find where a sorted column's values change.
+
+## Cons
+
+-   User experience might be confusing at first
+-   Requires some amount of locking column widths otherwise the columns can jump around as you scroll through variable length content.
+-   Might be difficult to get working with phones/tablets (should be possible though)
+-   Will the constant updating of the same table row DOM elements cause a lot of CPU/GPU/Memory thrashing? My testing so
+    far says no but how will it work on less powerful machines/browsers.
+
+## Further things to try
+
+-   How well does this work in a card view scenario?
+-   Add traditional page buttons in addition to scrolling. As user scrolls which page the user was on would change. Allow user to
+    jump to any page and get the best of all worlds.

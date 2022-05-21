@@ -1,41 +1,48 @@
 <template>
-    <div class="font-sans flex items-stretch relative p-3">
-        <LoadingOverlay v-if="loading" />
-        <table class="flex-1 w-full" @wheel.prevent="onTableMouseWheel">
-            <colgroup>
-                <col
-                    v-for="c in columns"
-                    :key="c.key"
-                    :style="{ width: c.widthCss || 'auto' }"
-                />
-            </colgroup>
-            <thead>
-                <tr>
-                    <th v-for="c in columns" :key="c.key" class="pb-3">
-                        {{ c.label }}
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <TableRow
-                    v-for="r in windowRows"
-                    :key="r[tableConfig.rowKeyProp]"
-                    :columns="columns"
-                    :record="r"
-                />
-            </tbody>
-        </table>
-        <VirtualScroller
-            ref="virtualScroller"
-            :popup-content-component="
-                tableConfig.virtualScrollerPopupContentComponent
-            "
-            :window-top-index-record="records[windowStartIndex]"
-            :scrollable-record-count="records.length - maxDisplayRowCount"
-            :total-scrollable-record-count="totalRecordCount"
-            @scrolled-to-new-window-start-index="(i) => (windowStartIndex = i)"
-            @scrolled-to-bottom="onScrolledToBottom"
-        />
+    <div>
+        <div class="mb-5 text-right italic pr-8">
+            {{ records.length }} of {{ totalRecordCount }} records loaded
+        </div>
+        <div class="font-sans flex items-stretch relative p-3">
+            <LoadingOverlay v-if="loading" />
+            <table class="flex-1 w-full" @wheel.prevent="onTableMouseWheel">
+                <colgroup>
+                    <col
+                        v-for="c in columns"
+                        :key="c.key"
+                        :style="{ width: c.widthCss || 'auto' }"
+                    />
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th v-for="c in columns" :key="c.key" class="pb-3">
+                            {{ c.label }}
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <TableRow
+                        v-for="r in windowRows"
+                        :key="r[tableConfig.rowKeyProp]"
+                        :columns="columns"
+                        :record="r"
+                    />
+                </tbody>
+            </table>
+            <VirtualScroller
+                ref="virtualScroller"
+                :popup-content-component="
+                    tableConfig.virtualScrollerPopupContentComponent
+                "
+                :window-top-index-record="records[windowStartIndex]"
+                :scrollable-record-count="records.length - maxDisplayRowCount"
+                :total-scrollable-record-count="totalRecordCount"
+                @scrolled-to-new-window-start-index="
+                    (i) => (windowStartIndex = i)
+                "
+                @scrolled-to-bottom="onScrolledToBottom"
+            />
+        </div>
     </div>
 </template>
 
@@ -113,8 +120,6 @@ export default {
             return this.records.length - this.maxDisplayRowCount;
         },
     },
-    watch: {},
-    created() {},
     mounted() {
         makeServer();
         this.fetchRecords();
